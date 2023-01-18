@@ -1,3 +1,4 @@
+import { Navbar } from "components/ui";
 import Head from "next/head";
 import { FC } from "react";
 
@@ -17,9 +18,11 @@ export const Layout: FC<Props> = ({ children, title }) => {
             <title>{ title || 'Pokemon App' }</title>
         </Head>
 
-        {/* <Navbar /> */}
+        <Navbar />
 
-        <main>
+        <main style={{
+            padding: '0 20px'
+        }}>
             { children }
         </main>
 
