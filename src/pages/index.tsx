@@ -4,6 +4,8 @@ import { pokeApi } from "api";
 import { PokemonListResponse, SmallPokemon } from "types";
 import { Layout } from "components/layouts";
 import { Card, Grid, Row, Text } from "@nextui-org/react";
+import { PokemonCard } from "components/pokemon/PokemonCard";
+import { PokemonList } from "components/pokemon";
 
 interface Props {
   pokemons: SmallPokemon[]
@@ -14,36 +16,7 @@ const HomePage: FC<Props> = ({ pokemons }) => {
     <Layout
       title="Listado de pokemons"
     >
-      <Grid.Container gap={ 2 } justify='flex-start'>
-        {
-          pokemons.map( ( pokemon ) => (
-            <Grid 
-              key={ pokemon.id }
-              xs={ 6 }
-              sm={ 3 }
-              md={ 2 }
-              xl={ 1 }
-            >
-              <Card isHoverable isPressable>
-                <Card.Body css={{ p: 1 }}>
-                  <Card.Image 
-                    src={ pokemon.img }
-                    width="100%"
-                    height={ 140 }
-                    alt={ pokemon.name }
-                  />
-                </Card.Body>
-                <Card.Footer>
-                  <Row justify="space-between">
-                    <Text transform="capitalize" b>{ pokemon.name }</Text>
-                    <Text css={{ color: "$accents7", fontWeight: "$semibold", fontSize: "$sm" }}>#{ pokemon.id }</Text>
-                  </Row>
-                </Card.Footer>
-              </Card>
-            </Grid>
-          ))
-        }  
-      </Grid.Container>      
+      <PokemonList pokemons={ pokemons } />   
     </Layout>
   )
 }
