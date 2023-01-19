@@ -4,6 +4,7 @@ import { Layout } from "components/layouts";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { PokemonResponse } from 'types';
+import { localFavorites } from "utils";
 
 
 interface Props {
@@ -13,8 +14,13 @@ interface Props {
 
 const PokemonDetail:NextPage<Props> = ({ pokemon }) => {
 
+
+    const onToggleFavorite = () => {
+        localFavorites.toggleFavorite( pokemon.id )
+    }
+
   return (
-    <Layout title="Algún Pokemón">
+    <Layout title={ pokemon.name }>
         <Grid.Container
             css={{ marginTop: '5px' }}
             gap={ 2 }
@@ -38,6 +44,7 @@ const PokemonDetail:NextPage<Props> = ({ pokemon }) => {
                         <Button
                             color="success"
                             ghost
+                            onClick={ onToggleFavorite }
                         >
                             Guardar en favoritos
                         </Button>
