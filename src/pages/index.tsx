@@ -2,6 +2,7 @@ import { FC } from "react"
 import { GetStaticProps } from "next";
 import { Layout } from "components/layouts";
 import { pokeApi } from "api";
+import { PokemonListResponse } from "types";
 
 
 
@@ -21,7 +22,7 @@ const HomePage: FC = ( props ) => {
 //Solo se puede usar desde las páginas
 export const getStaticProps: GetStaticProps = async (ctx) => {
 
-  const { data } = await pokeApi.get('/pokemon?limit=151');
+  const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151');
 
   return {
     props: {
