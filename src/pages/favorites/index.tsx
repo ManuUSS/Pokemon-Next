@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import { Layout } from 'components/layouts';
 import { NoFavorites } from 'components/pokemon';
 import { localFavorites } from 'utils';
-import { Card, Grid } from '@nextui-org/react';
-import { PokemonFavorite } from 'components/pokemon/PokemonFavorite';
+import { PokemonFavorite } from 'components/pokemon/';
 
 const FavoritePage = () => {
   
