@@ -36,8 +36,7 @@ const PokemonDetail:NextPage<Props> = ({ pokemon }) => {
                     <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Text transform="capitalize" h1>{ pokemon.name }</Text>
                         <Button
-                            color="secondary"
-                            shadow
+                            color="success"
                             ghost
                         >
                             Guardar en favoritos
