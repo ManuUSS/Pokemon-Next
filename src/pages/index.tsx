@@ -2,16 +2,26 @@ import { FC } from "react"
 import { GetStaticProps } from "next";
 import { Layout } from "components/layouts";
 import { pokeApi } from "api";
-import { PokemonListResponse } from "types";
+import { PokemonListResponse, SmallPokemon } from "types";
 
+interface Props {
+  pokemons: SmallPokemon[]
+}
 
-
-const HomePage: FC = ( props ) => {
+const HomePage: FC<Props> = ({ pokemons }) => {
   return (
     <Layout
       title="Listado de pokemons"
     >
-      <h1>Hola Mundo</h1>      
+      <ul>
+        {
+          pokemons.map( ( pokemon ) => (
+            <li key={pokemon.id}>{ pokemon.id } - { pokemon.name }
+              <code>{pokemon.url}</code>
+            </li>
+          ))
+        }  
+      </ul>      
     </Layout>
   )
 }
@@ -24,9 +34,16 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151');
 
+
+  const pokemons: SmallPokemon[] = data.results.map( ( pokemon, index ) => ({
+    ...pokemon,
+    id: index + 1,
+    url: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${ index + 1 }.svg`
+  }))
+
   return {
     props: {
-      pokemons: data.results
+      pokemons
     }
   }
 }
