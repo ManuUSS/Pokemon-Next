@@ -1,8 +1,9 @@
 import { FC } from "react"
 import { GetStaticProps } from "next";
-import { Layout } from "components/layouts";
 import { pokeApi } from "api";
 import { PokemonListResponse, SmallPokemon } from "types";
+import { Layout } from "components/layouts";
+import { Card, Grid, Row, Text } from "@nextui-org/react";
 
 interface Props {
   pokemons: SmallPokemon[]
@@ -13,15 +14,36 @@ const HomePage: FC<Props> = ({ pokemons }) => {
     <Layout
       title="Listado de pokemons"
     >
-      <ul>
+      <Grid.Container gap={ 2 } justify='flex-start'>
         {
           pokemons.map( ( pokemon ) => (
-            <li key={pokemon.id}>{ pokemon.id } - { pokemon.name }
-              <code>{pokemon.url}</code>
-            </li>
+            <Grid 
+              key={ pokemon.id }
+              xs={ 6 }
+              sm={ 3 }
+              md={ 2 }
+              xl={ 1 }
+            >
+              <Card isHoverable isPressable>
+                <Card.Body css={{ p: 1 }}>
+                  <Card.Image 
+                    src={ pokemon.img }
+                    width="100%"
+                    height={ 140 }
+                    alt={ pokemon.name }
+                  />
+                </Card.Body>
+                <Card.Footer>
+                  <Row justify="space-between">
+                    <Text transform="capitalize" b>{ pokemon.name }</Text>
+                    <Text css={{ color: "$accents7", fontWeight: "$semibold", fontSize: "$sm" }}>#{ pokemon.id }</Text>
+                  </Row>
+                </Card.Footer>
+              </Card>
+            </Grid>
           ))
         }  
-      </ul>      
+      </Grid.Container>      
     </Layout>
   )
 }
@@ -38,7 +60,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const pokemons: SmallPokemon[] = data.results.map( ( pokemon, index ) => ({
     ...pokemon,
     id: index + 1,
-    url: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${ index + 1 }.svg`
+    img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${ index + 1 }.svg`
   }))
 
   return {
