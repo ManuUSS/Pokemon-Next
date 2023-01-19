@@ -21,8 +21,6 @@ const HomePage: FC<Props> = ({ pokemons }) => {
   )
 }
 
-
-
 //Solo se ejecuta del lado del Server
 //Solo se puede usar desde las páginas
 export const getStaticProps: GetStaticProps = async (ctx) => {

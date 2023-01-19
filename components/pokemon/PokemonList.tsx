@@ -12,7 +12,7 @@ export const PokemonList: FC<Props> = ({ pokemons }) => {
     <Grid.Container gap={ 2 } justify='flex-start'>
         {
           pokemons.map( ( pokemon ) => (
-            <PokemonCard pokemon={ pokemon } />
+            <PokemonCard  key={ pokemon.id } pokemon={ pokemon } />
           ))
         }  
       </Grid.Container>    
