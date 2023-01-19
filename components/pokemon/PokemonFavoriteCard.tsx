@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { Card, Grid } from '@nextui-org/react'
+import { FC } from 'react';
+import { Card, Grid } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 
 interface Props {
